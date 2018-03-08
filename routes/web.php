@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+	'uses' => 'FrontendController@index',
+	'as'   => 'index'
+]);
 
 Auth::routes();
 
@@ -173,5 +174,10 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 	Route::post('/settings/update', [
 		'uses' => 'SettingsController@update',
 		'as'   => 'settings.update'
+	]);
+
+	Route::get('/{slug}', [
+		'uses' => 'FrontendController@singlePost',
+		'as'   => 'post.single'
 	]);
 });

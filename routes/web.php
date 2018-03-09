@@ -53,7 +53,7 @@ Route::get('/results', function() {
 Auth::routes();
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/dashboard', 'HomeController@index')->name('home');
 
 	Route::get('/posts', [
 		'uses' => 'PostsController@index',

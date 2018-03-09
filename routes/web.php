@@ -16,6 +16,30 @@ Route::get('/', [
 	'as'   => 'index'
 ]);
 
+Route::get('/post/{slug}', [
+	'uses' => 'FrontendController@singlePost',
+	'as'   => 'post.single'
+]);
+
+Route::get('/category/{id}', [
+	'uses' => 'FrontendController@category',
+	'as'   => 'category.single'
+]);
+
+Route::get('/tag/{id}', [
+	'uses' => 'FrontendController@tag',
+	'as'   => 'tag.single'
+]);
+
+Route::post('/subscribe', function(){
+	$email = request('email');
+
+	Newsletter::subscribe($email);
+
+	Session::flash('success', 'Subscribed to newsletter successfully');
+	return redirect()->back();
+});
+
 Route::get('/results', function() {
 	$posts = \App\Post::where('title', 'like', '%' . request('query') . '%')->get();
 
@@ -184,20 +208,5 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 	Route::post('/settings/update', [
 		'uses' => 'SettingsController@update',
 		'as'   => 'settings.update'
-	]);
-
-	Route::get('/post/{slug}', [
-		'uses' => 'FrontendController@singlePost',
-		'as'   => 'post.single'
-	]);
-
-	Route::get('/category/{id}', [
-		'uses' => 'FrontendController@category',
-		'as'   => 'category.single'
-	]);
-
-	Route::get('/tag/{id}', [
-		'uses' => 'FrontendController@tag',
-		'as'   => 'tag.single'
 	]);
 });

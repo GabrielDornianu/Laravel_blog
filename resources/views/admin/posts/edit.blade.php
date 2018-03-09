@@ -19,7 +19,7 @@
 				</div>
 				<div class="form-group">
 					<label for="content">Textarea</label>
-					<textarea class="form-control" name="content">{{ $post->content }}</textarea>
+					<textarea class="form-control" name="content" id="content">{{ $post->content }}</textarea>
 				</div>
 				<div class="form-group">
 					<label for="tags">Select tags</label>
@@ -56,4 +56,17 @@
 		</div>
 	</div>
 
+@stop
+
+@section('styles')
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+@stop
+
+@section('scripts')
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#content').summernote();
+		});
+	</script>
 @stop
